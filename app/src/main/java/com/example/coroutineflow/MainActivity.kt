@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.coroutineflow.databinding.ActivityMainBinding
+import com.example.coroutineflow.lesson.UsersActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +16,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        binding.buttonUsersActivity.setOnClickListener {
+            startActivity(UsersActivity.newIntent(this))
+        }
 
     }
 }

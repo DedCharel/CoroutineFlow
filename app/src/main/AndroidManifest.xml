@@ -21,6 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".lesson.UsersActivity"  android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity android:name=".lesson.Users2Activity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+        </activity>
     </application>
 
 </manifest>
