@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.coroutineflow.crypto_app.CryptoActivity
 import com.example.coroutineflow.databinding.ActivityMainBinding
 import com.example.coroutineflow.lesson.UsersActivity
 
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         binding.buttonUsersActivity.setOnClickListener {
             startActivity(UsersActivity.newIntent(this))
         }
-
+        binding.buttonCryptoActivity.setOnClickListener {
+            startActivity(CryptoActivity.newIntent(this))
+        }
     }
 }
