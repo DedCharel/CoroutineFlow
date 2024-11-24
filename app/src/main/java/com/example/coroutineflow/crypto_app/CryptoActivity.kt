@@ -3,10 +3,18 @@ package com.example.coroutineflow.crypto_app
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.coroutineflow.databinding.ActivityCryptoBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.launch
 
 class CryptoActivity : AppCompatActivity() {
 
@@ -33,20 +41,33 @@ class CryptoActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.state.observe(this) {
-            when (it) {
-                is State.Initial -> {
-                    binding.progressBarLoading.isVisible = false
-                }
-                is State.Loading -> {
-                    binding.progressBarLoading.isVisible = true
-                }
-                is State.Content -> {
-                    binding.progressBarLoading.isVisible = false
-                    adapter.submitList(it.currencyList)
-                }
+        lifecycleScope.launch {
+            //repeatOnLifecycle(Lifecycle.State.RESUMED){
+                viewModel.state
+                    .transform {
+                        Log.d("CryptoViewModel", "Transform")
+                        delay(10_000)
+                        emit(it)
+                    }
+                    .flowWithLifecycle(lifecycle, Lifecycle.State.RESUMED)
+                    .collect {
+                    when (it) {
+                        is State.Initial -> {
+                            binding.progressBarLoading.isVisible = false
+                        }
+                        is State.Loading -> {
+                            binding.progressBarLoading.isVisible = true
+                        }
+                        is State.Content -> {
+                            binding.progressBarLoading.isVisible = false
+                            adapter.submitList(it.currencyList)
+                        }
+                    }
+
             }
+
         }
+
     }
 
     companion object {
