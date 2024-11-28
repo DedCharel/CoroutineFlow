@@ -18,4 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/crypto_activity" />
+    <Button
+        android:id="@+id/button_team_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/team_score_activity" />
 </LinearLayout>
